@@ -16,7 +16,7 @@ defmodule Bird.Mixfile do
   def application do
     [
       mod: {Bird, []},
-      applications: [:logger, :httpoison, :floki]
+      applications: [:logger, :httpoison, :floki, :timex]
     ]
   end
 
@@ -32,7 +32,8 @@ defmodule Bird.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 0.10.0"},
-      {:floki, "~> 0.14.0"}
+      {:floki, "~> 0.14.0"},
+      {:timex, "~> 3.0"}
     ]
   end
 end

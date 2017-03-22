@@ -1,5 +1,6 @@
 defmodule Bird do
   use Application
+  use Timex
 
   def start(_type, _args) do
     IO.puts "Helllooo Bird"
