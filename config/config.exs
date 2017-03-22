@@ -2,6 +2,16 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
+config :bird, Listings.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "bird_repo",
+  username: "birdie",
+  password: "pass",
+  hostname: "localhost"
+
+config :bird, ecto_repos: [Listings.Repo]
+
+
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,

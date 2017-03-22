@@ -16,7 +16,14 @@ defmodule Bird.Mixfile do
   def application do
     [
       mod: {Bird, []},
-      applications: [:logger, :httpoison, :floki, :timex]
+      applications: [
+        :logger,
+        :httpoison,
+        :floki,
+        :timex,
+        :ecto,
+        :postgrex
+      ]
     ]
   end
 
@@ -33,7 +40,9 @@ defmodule Bird.Mixfile do
     [
       {:httpoison, "~> 0.10.0"},
       {:floki, "~> 0.14.0"},
-      {:timex, "~> 3.0"}
+      {:timex, "~> 3.0"},
+      {:postgrex, ">= 0.0.0"},
+      {:ecto, "~> 2.1"}
     ]
   end
 end

@@ -10,13 +10,17 @@ defmodule Bird.Parser do
       |> to_string
       |> String.to_integer
 
-    created_at =
+    date =
       row
       |> Floki.attribute(".result-date", "datetime")
       |> to_string
       |> String.split(" ")
       |> Enum.at(0)
       |> Timex.parse("{YYYY}-{0M}-{0D}")
+      |> case do
+          {:ok, date} -> date
+          {:error, _} -> nil
+         end
 
     title =
       row
@@ -27,6 +31,9 @@ defmodule Bird.Parser do
       row
       |> Floki.find(".result-meta .result-price")
       |> Floki.text
+      |> String.split("$")
+      |> Enum.at(1)
+      |> String.to_integer
 
     link =
       row
@@ -34,27 +41,26 @@ defmodule Bird.Parser do
       |> to_string
       |> (&(@url <> &1)).()
 
-    neighborhood =
+    hood =
       row
       |> Floki.find(".result-hood")
       |> Floki.text
       |> String.replace("(", "")
       |> String.replace(")", "")
 
-    %{
+    %Listings.Listing{
       id: id,
-      created_at: created_at,
+      date: date,
       title: title,
       price: price,
       link: link,
-      neighborhood: neighborhood
+      hood: hood
     }
   end
 
   def parse(html) do
     Floki.find(html, ".result-row")
       |> (fn(n) -> Enum.map(n, &(toListing &1)) end).()
-      |> IO.inspect
 
   end
 end
