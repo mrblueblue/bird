@@ -1,16 +1,17 @@
 defmodule Bird do
   use Application
-  import Supervisor.Spec, warn: false
 
   def start(_type, _args) do
+    import Supervisor.Spec, warn: false
+
     children = [
-      supervisor(Listings.Repo, []),
+      supervisor(Listings.Repo, [])
     ]
 
     IO.puts "Helllooo Bird"
     HTTPoison.start
-    Bird.Scraper.scrape
 
-    Supervisor.start_link children, strategy: :one_for_one
+    # opts = [strategy: :one_for_one, name: Listings.Supervisor]
+    Supervisor.start_link(children, strategy: :one_for_one, name: Listings.Supervisor)
   end
 end

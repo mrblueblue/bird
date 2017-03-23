@@ -6,8 +6,7 @@ defmodule Bird.Scraper do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         body
         |> Bird.Parser.parse
-        |> Enum.at(1)
-        |> IO.inspect
+        |> (fn(n) -> Enum.each(n, &(Listings.Repo.insert &1)) end).()
 
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         IO.puts "Not found :("

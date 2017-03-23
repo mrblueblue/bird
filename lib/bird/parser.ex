@@ -4,11 +4,10 @@ defmodule Bird.Parser do
   @url "https://sfbay.craigslist.org"
 
   defp toListing(row) do
-    id =
+    pid =
       row
       |> Floki.attribute(".result-row", "data-pid")
       |> to_string
-      |> String.to_integer
 
     date =
       row
@@ -16,11 +15,8 @@ defmodule Bird.Parser do
       |> to_string
       |> String.split(" ")
       |> Enum.at(0)
-      |> Timex.parse("{YYYY}-{0M}-{0D}")
-      |> case do
-          {:ok, date} -> date
-          {:error, _} -> nil
-         end
+      |> Timex.parse!("{YYYY}-{0M}-{0D}")
+      |> Ecto.Date.cast!
 
     title =
       row
@@ -49,7 +45,7 @@ defmodule Bird.Parser do
       |> String.replace(")", "")
 
     %Listings.Listing{
-      id: id,
+      pid: pid,
       date: date,
       title: title,
       price: price,
