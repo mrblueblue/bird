@@ -42,7 +42,8 @@ defmodule Bird.Mixfile do
       {:floki, "~> 0.14.0"},
       {:timex, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:ecto, "~> 2.1"}
+      {:ecto, "~> 2.1"},
+      {:distillery, "~> 0.9"}
     ]
   end
 end

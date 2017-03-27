@@ -11,6 +11,7 @@ config :bird, Listings.Repo,
 
 config :bird, ecto_repos: [Listings.Repo]
 
+config :bird, slack_token: System.get_env("SLACK_TOKEN")
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this

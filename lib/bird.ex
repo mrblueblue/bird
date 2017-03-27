@@ -5,7 +5,8 @@ defmodule Bird do
     import Supervisor.Spec, warn: false
 
     children = [
-      supervisor(Listings.Repo, [])
+      supervisor(Listings.Repo, []),
+      worker(Bird.Scraper, [])
     ]
 
     IO.puts "Helllooo Bird"

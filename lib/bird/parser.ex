@@ -3,7 +3,7 @@ defmodule Bird.Parser do
 
   @url "https://sfbay.craigslist.org"
 
-  defp toListing(row) do
+  defp to_listing(row) do
     pid =
       row
       |> Floki.attribute(".result-row", "data-pid")
@@ -56,7 +56,27 @@ defmodule Bird.Parser do
 
   def parse(html) do
     Floki.find(html, ".result-row")
-      |> (fn(n) -> Enum.map(n, &(toListing &1)) end).()
+      |> (fn(n) -> Enum.map(n, &(to_listing &1)) end).()
+  end
 
+  def reject_saved(listings) do
+    saved_listings =
+      listings
+      |> Enum.map(&(&1.pid))
+      |> Enum.reduce(nil, &listings_query/2)
+      |> Listings.Repo.all
+      |> Enum.map(&(&1.pid))
+
+    listings
+      |> Enum.reject(&(Enum.member?(saved_listings, &1.pid)))
+  end
+
+  defp listings_query(listing, query) do
+    require Ecto.Query
+    if query == nil do
+      Listings.Listing |> Ecto.Query.where(pid: ^listing)
+    else
+      query |> Ecto.Query.or_where(pid: ^listing)
+    end
   end
 end
