@@ -1,24 +1,35 @@
 # Bird
 
-**TODO: Add description**
+Craiglist apartment scraper and slackbot written in Elixir
 
-## Installation
+## Running
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+Before running, create a `.env` file with your Slack API Token:
 
-  1. Add `bird` to your list of dependencies in `mix.exs`:
+```
+export SLACK_TOKEN="<TOKEN>"
+```
 
-    ```elixir
-    def deps do
-      [{:bird, "~> 0.1.0"}]
-    end
-    ```
+### Development
 
-  2. Ensure `bird` is started before your application:
+```bash
+mix deps.get
+iex -S mix
+```
 
-    ```elixir
-    def application do
-      [applications: [:bird]]
-    end
-    ```
+### Production
 
+```bash
+mix deps.get
+mix release --verbose --env=prod
+rel/bird/bin/bird migrate
+rel/bird/bin/bird start
+```
+
+### Docker
+
+```bash
+docker-compose up -d --build
+docker-compose run scraper ./bin/bird migrate
+docker-compose run scraper ./bin/bird foreground
+```

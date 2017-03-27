@@ -9,10 +9,6 @@ defmodule Bird do
       worker(Bird.Scraper, [])
     ]
 
-    IO.puts "Helllooo Bird"
-    HTTPoison.start
-
-    # opts = [strategy: :one_for_one, name: Listings.Supervisor]
     Supervisor.start_link(children, strategy: :one_for_one, name: Listings.Supervisor)
   end
 end

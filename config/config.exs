@@ -1,5 +1,3 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
 config :bird, Listings.Repo,
@@ -7,35 +5,16 @@ config :bird, Listings.Repo,
   database: "bird_repo",
   username: "birdie",
   password: "pass",
-  hostname: "localhost"
+  hostname: if (Mix.env == :prod), do: "db", else: "localhost"
 
 config :bird, ecto_repos: [Listings.Repo]
 
-config :bird, slack_token: System.get_env("SLACK_TOKEN")
-
-# This configuration is loaded before any dependency and is restricted
-# to this project. If another project depends on this project, this
-# file won't be loaded nor affect the parent project. For this reason,
-# if you want to provide default values for your application for
-# 3rd-party users, it should be done in your "mix.exs" file.
-
-# You can configure for your application as:
-#
-#     config :bird, key: :value
-#
-# And access this configuration in your application as:
-#
-#     Application.get_env(:bird, :key)
-#
-# Or configure a 3rd-party app:
-#
-#     config :logger, level: :info
-#
-
-# It is also possible to import configuration files, relative to this
-# directory. For example, you can emulate configuration per environment
-# by uncommenting the line below and defining dev.exs, test.exs and such.
-# Configuration from the imported file will override the ones defined
-# here (which is why it is important to import them last).
-#
-#     import_config "#{Mix.env}.exs"
+config :bird,
+  slack_token: System.get_env("SLACK_TOKEN"),
+  slack_channel: "general",
+  bot_name: "bird_bot",
+  icon_url: "https://ca.slack-edge.com/T4P3WSD33-U4P9K23TK-16c837768aa8-512",
+  craigslist_url: "https://sfbay.craigslist.org",
+  min_price: 500,
+  max_price: 1200,
+  neighborhoods: [7,9,13,14,15,18,21,26,28,2,114]
