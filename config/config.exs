@@ -5,7 +5,7 @@ config :bird, Listings.Repo,
   database: "bird_repo",
   username: "birdie",
   password: "pass",
-  hostname: "localhost"
+  hostname: "db"
 
 config :bird, ecto_repos: [Listings.Repo]
 
