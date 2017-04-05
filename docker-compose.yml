@@ -1,11 +1,12 @@
 version: '2'
 services:
   db:
-    image: postgres
+    image: postgres:9.5
+    environment:
+      POSTGRES_USER: "birdie"
+      POSTGRES_PASSWORD: "pass"
   web:
     build: .
-    environment:
-      MIX_ENV: "prod"
     ports:
       - "4000:4000"
     depends_on:
