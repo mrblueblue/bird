@@ -5,7 +5,7 @@ config :bird, Listings.Repo,
   database: "bird_repo",
   username: "birdie",
   password: "pass",
-  hostname: "db"
+  hostname: if (Mix.env == :prod), do: "db", else: "localhost"
 
 config :bird, ecto_repos: [Listings.Repo]
 

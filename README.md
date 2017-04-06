@@ -1,24 +1,10 @@
 # Bird
 
-**TODO: Add description**
+Craiglist apartment scraper and slackbot written in Elixir
 
-## Installation
+## Deploying
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
-  1. Add `bird` to your list of dependencies in `mix.exs`:
-
-    ```elixir
-    def deps do
-      [{:bird, "~> 0.1.0"}]
-    end
-    ```
-
-  2. Ensure `bird` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:bird]]
-    end
-    ```
-
+```bash
+docker-compose up -d --build
+docker-compose run srcaper ./bin/bird foreground
+```

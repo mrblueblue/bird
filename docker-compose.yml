@@ -1,11 +1,11 @@
-version: '2'
+version: '2.1'
 services:
   db:
-    image: postgres:9.5
+    image: postgres:9.6.1
     environment:
       POSTGRES_USER: "birdie"
       POSTGRES_PASSWORD: "pass"
-  web:
+  scraper:
     build: .
     ports:
       - "4000:4000"

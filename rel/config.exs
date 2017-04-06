@@ -10,6 +10,7 @@ end
 environment :prod do
   set include_erts: true
   set include_src: false
+  set pre_start_hook: "rel/hooks/migrate.sh"
 end
 
 release :bird do
