@@ -8,8 +8,6 @@ defmodule Bird.Reporter do
   ]
 
   def post_to_slack(text) do
-    IO.inspect @form
-    IO.inspect text
     body = {:form, Enum.concat(@form, [{"text", text}])}
     type = %{"Content-type" => "application/x-www-form-urlencoded"}
     HTTPoison.post(@slack_url, body, type)

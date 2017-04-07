@@ -1,8 +1,8 @@
 defmodule Bird.ReleaseTasks do
   @start_apps [
-      :postgrex,
-      :ecto
-    ]
+    :postgrex,
+    :ecto
+  ]
 
   @myapps [
     :bird

@@ -6,5 +6,6 @@ Craiglist apartment scraper and slackbot written in Elixir
 
 ```bash
 docker-compose up -d --build
-docker-compose run srcaper ./bin/bird foreground
+docker-compose run scraper ./bin/bird migrate
+docker-compose run scraper ./bin/bird foreground
 ```

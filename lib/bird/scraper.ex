@@ -12,6 +12,7 @@ defmodule Bird.Scraper do
   end
 
   defp do_scrape do
+    IO.puts "Scraping..."
     scrape()
     :timer.sleep(1200000)
     do_scrape()
