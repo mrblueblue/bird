@@ -10,6 +10,12 @@ Before running, create a `.env` file with your Slack API Token:
 export SLACK_TOKEN="<TOKEN>"
 ```
 
+Then run:
+
+```bash
+source .env
+```
+
 ### Development
 
 ```bash
